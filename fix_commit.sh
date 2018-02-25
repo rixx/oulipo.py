@@ -1,13 +1,13 @@
 commit=$(git log -1 --format="%H")
 
-if [[ $commit = *"e"* ]]; then
+if [[ $commit = *"\x65"* ]]; then
     printf '' > .oulipo
-    while [[ $commit = *"e"* ]]
+    while [[ $commit = *"\x65"* ]]
     do
         printf "Not ok: $commit, trying to fix.\n"
         printf ' ' >> .oulipo
         git add .oulipo
-        git commit --amend --no-edit  # booh, git!
+        git $(printf -- 'commit --am\x65nd --no-\x65dit')
         commit=$(git log -1 --format="%H")
     done
 fi
